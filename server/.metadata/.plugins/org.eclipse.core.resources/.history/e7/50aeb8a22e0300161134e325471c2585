@@ -1,0 +1,5 @@
+package com.mvctest.controllers;
+
+public class AppConfig {
+
+}

@@ -1,0 +1,5 @@
+package com.gcinemaflex.model;
+
+public class User {
+
+}

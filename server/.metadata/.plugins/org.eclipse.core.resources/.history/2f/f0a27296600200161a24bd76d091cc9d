@@ -1,0 +1,17 @@
+package com.gcinemaflix.service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.gcinemaflix.model.User;
+
+@Service
+public interface UserService {
+	
+	public User create(User user);
+	public User delete(int id);
+	public List<User> findAll();
+	public User update(User user);
+
+}

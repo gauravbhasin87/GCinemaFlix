@@ -1,0 +1,20 @@
+package com.gcinemaflix.service;
+
+import org.springframework.stereotype.Service;
+import com.gcinemaflex.model.User;
+
+@Service
+public class UserService {
+	
+	
+	public User findOne(String id){
+			User u = new User();
+			u.setFirstName("gaurav");
+			u.setId("1");
+			u.setLastName("bhasin");
+			u.setUsername("gauravbhasin87");
+			u.setPassword("abcd");
+			return u;
+	}
+	
+}

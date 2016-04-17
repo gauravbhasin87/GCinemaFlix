@@ -1,0 +1,29 @@
+package com.gcinemaflix.controllers;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.gcinemaflix.model.User;
+
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.http.MediaType;
+
+
+@RestController
+public class UserController {
+	
+	public User user = new User();
+	
+	@RequestMapping(value="/user",produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public User getUser(){
+		user.setId("A");
+		user.setFirstName("Gaurav");
+		user.setLastName("Bhasin");
+		user.setPassword("***");
+		user.setUsername("gauravbhasin");
+		
+		return user;
+	}
+	
+	
+}

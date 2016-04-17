@@ -1,0 +1,5 @@
+package com.mvctest.model;
+
+public class User {
+
+}
