@@ -19,7 +19,12 @@ public class UserServiceImpl implements UserService {
 	private UserRepository userRepository;
 	
 	public User create(User user){
-			return userRepository.save(user);
+			User existingUser = userRepository.findByUsername(user.getUsername());
+			if(existingUser != null){
+				return null;
+			}
+			else
+				return userRepository.save(user);
 	}
 	public User delete(int id){
 		User user = userRepository.findOne(id);
@@ -31,8 +36,14 @@ public class UserServiceImpl implements UserService {
 		return (List<User>) userRepository.findAll();
 	}
 	public User update(User user){
-		User u = userRepository.findOne(user.getId());
+		User existingUser = userRepository.findByUsername(user.getUsername());
+		if(existingUser == null)
+			return null;
+		else{
+			existingUser.setFirstName(user.getFirstName());
+			existingUser.setLastName(user.getLastName());
+		}
 		
-		return user;
+		return existingUser;
 	}
 }

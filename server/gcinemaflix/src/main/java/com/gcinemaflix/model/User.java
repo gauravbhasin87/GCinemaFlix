@@ -1,5 +1,6 @@
 package com.gcinemaflix.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -12,10 +13,16 @@ public class User {
 	@Id
 	@GeneratedValue
 	private int id;
+	@Column(name="firstName",nullable=false)
 	private String firstName;
+	@Column(name="lastName",nullable=false)
 	private String lastName;
+	@Column(name="username",nullable=false)
 	private String username;
+	@Column(name="password",nullable=false)
 	private String password;
+	
+	
 	public int getId() {
 		return id;
 	}

@@ -1,0 +1,24 @@
+package com.gcinemaflix.model;
+
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="genres")
+public class Genres {
+	@Id
+	@GeneratedValue
+	long genreId;
+	String genreName;
+	
+	@ManyToMany
+	@JoinTable(name="movies_genres",
+					joinColumns=@JoinColumn(name=))
+	List<Movies> movies;
+}
