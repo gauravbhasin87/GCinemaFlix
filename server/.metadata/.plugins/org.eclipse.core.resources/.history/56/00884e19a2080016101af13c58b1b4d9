@@ -24,7 +24,10 @@ public class Genre {
 	String name;
 	
 	
-	@ManyToMany(mappedBy="genres")
+	@ManyToMany(cascade = {CascadeType.ALL})
+	@JoinTable(name="movies_genres",
+			joinColumns = @JoinColumn(name="genre_id"),
+			inverseJoinColumns = @JoinColumn(name="movie_id" ))
 	List<Movie> movies;
 
 	public long getId() {
@@ -54,12 +57,12 @@ public class Genre {
 	@Override
 	public int hashCode() {
 		// TODO Auto-generated method stub
-		return this.name.hashCode();
+		return super.hashCode();
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		// TODO Auto-generated method stub
-		return this.name.equals(((Genre)obj).getName());
+		return super.equals(obj);
 	}
 }

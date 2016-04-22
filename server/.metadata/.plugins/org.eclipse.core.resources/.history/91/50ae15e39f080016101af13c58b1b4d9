@@ -17,7 +17,6 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gcinemaflix.model.Genre;
 import com.gcinemaflix.model.Movie;
-import com.gcinemaflix.repository.GenreRepository;
 import com.gcinemaflix.service.MovieService;
 
 @RestController
@@ -25,7 +24,6 @@ public class MovieController {
 	
 	@Autowired
 	private MovieService movieService;
-	@Autowired GenreRepository genreRepository;
 	
 	@RequestMapping(value="/movies", method=RequestMethod.GET)
 	public List<Movie> getAllMovies(){

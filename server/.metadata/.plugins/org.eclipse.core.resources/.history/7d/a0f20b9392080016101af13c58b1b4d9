@@ -13,8 +13,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-//import org.hibernate.annotations.CascadeType;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -62,7 +60,6 @@ public class Movie {
 	String imdbID;
 	@JsonProperty(value="Type")
 	String type;
-	
 	
 	@ManyToMany(cascade = {CascadeType.ALL})
 	@JoinTable(name="movies_genres",

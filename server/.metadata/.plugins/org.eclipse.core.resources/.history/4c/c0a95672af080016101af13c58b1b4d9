@@ -24,7 +24,10 @@ public class Genre {
 	String name;
 	
 	
-	@ManyToMany(mappedBy="genres")
+	@ManyToMany(cascade = {CascadeType.ALL})
+	@JoinTable(name="movies_genres",
+			joinColumns = @JoinColumn(name="genre_id"),
+			inverseJoinColumns = @JoinColumn(name="movie_id" ))
 	List<Movie> movies;
 
 	public long getId() {

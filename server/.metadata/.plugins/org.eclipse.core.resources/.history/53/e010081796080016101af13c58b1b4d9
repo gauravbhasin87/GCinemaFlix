@@ -13,8 +13,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-//import org.hibernate.annotations.CascadeType;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -63,11 +61,10 @@ public class Movie {
 	@JsonProperty(value="Type")
 	String type;
 	
-	
-	@ManyToMany(cascade = {CascadeType.ALL})
+	@ManyToMany(cascade = {CascadeType.MERGE})
 	@JoinTable(name="movies_genres",
-			joinColumns = @JoinColumn(name="movie_id"),
-			inverseJoinColumns = @JoinColumn(name="genre_id" ))
+			joinColumns = @JoinColumn(name="genre_id"),
+			inverseJoinColumns = @JoinColumn(name="movie_id" ))
 	@JsonProperty(value="Genre")
 	List<Genre> genres; 
 	

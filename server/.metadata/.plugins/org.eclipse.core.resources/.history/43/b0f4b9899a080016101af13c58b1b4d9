@@ -63,7 +63,6 @@ public class Movie {
 	@JsonProperty(value="Type")
 	String type;
 	
-	
 	@ManyToMany(cascade = {CascadeType.ALL})
 	@JoinTable(name="movies_genres",
 			joinColumns = @JoinColumn(name="movie_id"),
