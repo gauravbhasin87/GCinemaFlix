@@ -3,6 +3,7 @@ package com.gcinemaflix.model;
 import java.sql.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,48 +13,79 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
 @Table(name="movies")
+@JsonIgnoreProperties(ignoreUnknown = true) 
 public class Movie {
 	@Id
 	@GeneratedValue
 	@Column(name="movie_id")
 	long id;
-	String title;
-	String year;
+	@JsonProperty(value="Title")
+	private String title;
+	@JsonProperty(value="Year")
+	private int year;
+	
+	@JsonProperty(value="Rated")
 	String rated;
-	Date released;
-	String Director;
+	@JsonProperty(value="Released")
+	String released;			//should be Date?????????????
+	@JsonProperty(value="RunTime")
+	String runTime;
+	@JsonProperty(value="Director")
+	String director;
+	@JsonProperty(value="Writer")
 	String writers;
+	@JsonProperty(value="Actors")
 	String actors;
+	@JsonProperty(value="Plot")
 	String plot;
-	String languages;
+	@JsonProperty(value="Language")
+	String language;
+	@JsonProperty(value="Country")
 	String country;
+	@JsonProperty(value="Awards")
 	String awards;
+	@JsonProperty(value="Poster")
 	String poster;
-	int metascore;
+	@JsonProperty(value="Metascore")
+	int metascore; 
+	@JsonProperty(value="imdbRating")
 	float imdbRating;
-	long imdbVotes;
+	@JsonProperty(value="imdbVotes")
+	String imdbVotes;
 	String imdbID;
+	@JsonProperty(value="Type")
 	String type;
 	
-	@ManyToMany
+	@ManyToMany(cascade = {CascadeType.ALL})
 	@JoinTable(name="movies_genres",
 			joinColumns = @JoinColumn(name="movie_id"),
 			inverseJoinColumns = @JoinColumn(name="genre_id" ))
+	@JsonProperty(value="Genre")
 	List<Genre> genres; 
 	
 	
+	
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
 	public String getTitle() {
 		return title;
 	}
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getYear() {
+	public int getYear() {
 		return year;
 	}
-	public void setYear(String year) {
+	public void setYear(int year) {
 		this.year = year;
 	}
 	public String getRated() {
@@ -62,17 +94,23 @@ public class Movie {
 	public void setRated(String rated) {
 		this.rated = rated;
 	}
-	public Date getReleased() {
+	public String getReleased() {
 		return released;
 	}
-	public void setReleased(Date released) {
+	public void setReleased(String released) {
 		this.released = released;
 	}
+	public String getRunTime() {
+		return runTime;
+	}
+	public void setRunTime(String runTime) {
+		this.runTime = runTime;
+	}
 	public String getDirector() {
-		return Director;
+		return director;
 	}
 	public void setDirector(String director) {
-		Director = director;
+		this.director = director;
 	}
 	public String getWriters() {
 		return writers;
@@ -92,11 +130,11 @@ public class Movie {
 	public void setPlot(String plot) {
 		this.plot = plot;
 	}
-	public String getLanguages() {
-		return languages;
+	public String getLanguage() {
+		return language;
 	}
-	public void setLanguages(String languages) {
-		this.languages = languages;
+	public void setLanguage(String language) {
+		this.language = language;
 	}
 	public String getCountry() {
 		return country;
@@ -128,10 +166,10 @@ public class Movie {
 	public void setImdbRating(float imdbRating) {
 		this.imdbRating = imdbRating;
 	}
-	public long getImdbVotes() {
+	public String getImdbVotes() {
 		return imdbVotes;
 	}
-	public void setImdbVotes(long imdbVotes) {
+	public void setImdbVotes(String imdbVotes) {
 		this.imdbVotes = imdbVotes;
 	}
 	public String getImdbID() {
@@ -146,10 +184,7 @@ public class Movie {
 	public void setType(String type) {
 		this.type = type;
 	}
-	long getId() {
-		return id;
-	}
-	void setId(long movieId) {
-		this.id = movieId;
-	}
+	
+	
+	
 }
