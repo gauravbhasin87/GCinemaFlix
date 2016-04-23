@@ -57,13 +57,8 @@ public class RawMovieServiceImpl implements RawMovieService{
 	}
 
 	@Override
-	public List<RawMovie> findByYear(int year) {
+	public List<RawMovie> findByYear(String year) {
 		return rmovieRepository.findByYear(year);
-	}
-
-	@Override
-	public List<RawMovie> findbyGenre(String genre) {
-		return rmovieRepository.findByGenre(genre);
 	}
 
 }

@@ -14,6 +14,4 @@ public interface RawMovieService {
 	public List<String> loadMoviesinDB(MovieListWrapper movies);
 	public List<RawMovie> findByTitle(String Title);
 	public List<RawMovie> findByType(String type);
-	public List<RawMovie> findByYear(int year);
-	public List<RawMovie> findbyGenre(String genre);
 }

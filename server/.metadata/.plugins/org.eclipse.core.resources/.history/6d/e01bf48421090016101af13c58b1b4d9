@@ -63,14 +63,9 @@ public class RawMovieController {
 	
 	@RequestMapping(value="/findMovieByYear/{year}",method=RequestMethod.GET)
 	public ResponseEntity<List<RawMovie>> findByYear(@PathVariable int year){
-		List<RawMovie> movies = movieService.findByYear(year);
+		List<RawMovie> movies = movieService.findByYear(String.valueOf(year));
 		return new ResponseEntity<>(movies,HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/findMovieByGenre/{genre}",method=RequestMethod.GET)
-	public ResponseEntity<List<RawMovie>> findByGenre(@PathVariable String genre){
-		List<RawMovie> movies = movieService.findbyGenre(genre);
-		return new ResponseEntity<>(movies,HttpStatus.OK);
-	}
 	
 }
