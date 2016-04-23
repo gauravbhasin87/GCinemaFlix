@@ -19,6 +19,7 @@ import com.gcinemaflix.model.Genre;
 import com.gcinemaflix.model.Movie;
 import com.gcinemaflix.repository.GenreRepository;
 import com.gcinemaflix.service.MovieService;
+import com.gcinemaflix.service.RawMovieService;
 
 @RestController
 public class MovieController {
@@ -29,18 +30,8 @@ public class MovieController {
 	
 	@RequestMapping(value="/movies", method=RequestMethod.GET)
 	public List<Movie> getAllMovies(){
-		List<Movie> list = new ArrayList<>();
-		Movie m = new Movie();
-		//m.setTitle("Ram Janey");
-		List<Genre> list1 = new ArrayList<>();
-		Genre rock = new Genre();
-		rock.setName("Rock");
-		list1.add(rock);
-		
-		//m.setGenres(list1);
-		list.add(m);
-		return list;
-		
+//	
+		return movieService.getMovies();
 	}
 	
 	@RequestMapping(value="/movies",method=RequestMethod.POST)
@@ -76,3 +67,10 @@ public class MovieController {
 	
 }
 
+//List<Movie> list = new ArrayList<>();
+//Movie m = new Movie();
+////m.setTitle("Ram Janey");
+//List<Genre> list1 = new ArrayList<>();
+//Genre rock = new Genre();
+//rock.setName("Rock");
+//list1.add(rock);

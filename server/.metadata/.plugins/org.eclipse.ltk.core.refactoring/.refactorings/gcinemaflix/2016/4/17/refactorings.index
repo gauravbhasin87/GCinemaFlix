@@ -17,3 +17,7 @@
 1461292656907	Rename field 'Title'
 1461292812106	Encapsulate field 'year'
 1461294821604	Encapsulate field 'country'
+1461370178810	Rename type 'RawMovie'
+1461370402565	Rename type 'IRawMovie'
+1461370442937	Rename type 'RawMovieImpl'
+1461370563895	Rename type 'RawService'

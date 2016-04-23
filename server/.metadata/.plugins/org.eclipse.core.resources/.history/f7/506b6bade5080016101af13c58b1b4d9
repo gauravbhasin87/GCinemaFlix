@@ -1,0 +1,5 @@
+package com.gcinemaflix.repository;
+
+public interface RawMovieRepository {
+
+}

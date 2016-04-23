@@ -1,0 +1,28 @@
+package com.gcinemaflix.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.gcinemaflix.model.Movie;
+import com.gcinemaflix.model.RawMovie;
+import com.gcinemaflix.repository.RawMovieRepository;
+
+
+public class RawMovieImpl implements IRawMovie{
+
+	@Autowired
+	private RawMovieRepository rmovieRepository;
+	@Override
+	public List<RawMovie> getMovies() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public RawMovie addMovie(RawMovie movie) {
+		// TODO Auto-generated method stub
+		return rmovieRepository.save(movie);
+	}
+
+}
