@@ -48,13 +48,7 @@ public class RawMovieController {
 			 return new ResponseEntity<RawMovie>(HttpStatus.CONFLICT);
 	}
 	
-	@RequestMapping(value="/findMovieByTitle/{title}", method=RequestMethod.GET)
-	public ResponseEntity<List<RawMovie>> findByTitle(@PathVariable String title){
-		List<RawMovie> movies = movieService.findByTitle(title);
-		return new ResponseEntity<>(movies, HttpStatus.OK);
-	}
-	
-	@RequestMapping(value="/findMovieByType/{type}", method=RequestMethod.GET)
+	@RequestMapping(value="/findMovieByType/{type")
 	public ResponseEntity<List<RawMovie>> findByType(@PathVariable String type){
 		type = type.toLowerCase();
 		List<RawMovie> movies = movieService.findByType(type);

@@ -7,13 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.gcinemaflix.model.Movie;
 import com.gcinemaflix.model.RawMovie;
 import com.gcinemaflix.repository.RawMovieRepository;
 import com.gcinemaflix.utils.MovieListWrapper;
-@Transactional
+
 @Service
 public class RawMovieServiceImpl implements RawMovieService{
 
@@ -21,13 +20,15 @@ public class RawMovieServiceImpl implements RawMovieService{
 	private RawMovieRepository rmovieRepository;
 	@Override
 	public List<RawMovie> getMovies() {
+		// TODO Auto-generated method stub
 		return rmovieRepository.findAll();
 	}
 
 	@Override
 	public RawMovie addMovie(RawMovie movie) {
-		List<RawMovie> existing = rmovieRepository.findByTitle(movie.getTitle());
-		if(existing == null || existing.size()==0 )
+		// TODO Auto-generated method stub
+		RawMovie existing = rmovieRepository.findByTitle(movie.getTitle());
+		if(existing == null)
 			return rmovieRepository.save(movie);
 		else
 			return null;
@@ -46,14 +47,9 @@ public class RawMovieServiceImpl implements RawMovieService{
 	}
 
 	@Override
-	public List<RawMovie> findByTitle(String Title) {
+	public RawMovie findByTitle(String Title) {
+		// TODO Auto-generated method stub
 		return rmovieRepository.findByTitle(Title);
-	}
-
-	@Override
-	public List<RawMovie> findByType(String type) {
-		List<RawMovie> movies = rmovieRepository.findByType(type);
-		return movies;
 	}
 
 }

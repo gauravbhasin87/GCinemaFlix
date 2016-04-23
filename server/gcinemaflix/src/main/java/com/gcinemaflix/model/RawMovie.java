@@ -34,6 +34,7 @@ public class RawMovie {
 	@JsonProperty(value="Actors")
 	String actors;
 	@JsonProperty(value="Plot")
+	@Column(length=1000)
 	String plot;
 	@JsonProperty(value="Language")
 	String language;

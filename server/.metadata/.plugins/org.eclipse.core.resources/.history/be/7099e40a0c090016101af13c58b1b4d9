@@ -7,13 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.gcinemaflix.model.Movie;
 import com.gcinemaflix.model.RawMovie;
 import com.gcinemaflix.repository.RawMovieRepository;
 import com.gcinemaflix.utils.MovieListWrapper;
-@Transactional
+
 @Service
 public class RawMovieServiceImpl implements RawMovieService{
 
