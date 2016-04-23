@@ -26,7 +26,7 @@ public class RawMovieServiceImpl implements RawMovieService{
 
 	@Override
 	public RawMovie addMovie(RawMovie movie) {
-		List<RawMovie> existing = rmovieRepository.findByTitle(movie.getTitle());
+		List<RawMovie> existing = rmovieRepository.findByTitleIgnoreCase(movie.getTitle());
 		if(existing == null || existing.size()==0 )
 			return rmovieRepository.save(movie);
 		else
@@ -47,12 +47,12 @@ public class RawMovieServiceImpl implements RawMovieService{
 
 	@Override
 	public List<RawMovie> findByTitle(String Title) {
-		return rmovieRepository.findByTitle(Title);
+		return rmovieRepository.findByTitleIgnoreCase(Title);
 	}
 
 	@Override
 	public List<RawMovie> findByType(String type) {
-		List<RawMovie> movies = rmovieRepository.findByType(type);
+		List<RawMovie> movies = rmovieRepository.findByTypeIgnoreCase(type);
 		return movies;
 	}
 
@@ -64,6 +64,21 @@ public class RawMovieServiceImpl implements RawMovieService{
 	@Override
 	public List<RawMovie> findbyGenre(String genre) {
 		return rmovieRepository.findByGenre(genre);
+	}
+	
+	@Override
+	public List<RawMovie> orderByRating(){
+		return rmovieRepository.OrderByImdbRatingDesc(); 
+	}
+
+	@Override
+	public List<RawMovie> orderByVotes() {
+		return rmovieRepository.OrderByImdbVotesDesc();
+	}
+
+	@Override
+	public List<RawMovie> orderByYear() {
+		return rmovieRepository.OrderByYearDesc();
 	}
 
 }

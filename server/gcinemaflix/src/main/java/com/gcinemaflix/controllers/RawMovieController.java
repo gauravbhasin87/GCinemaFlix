@@ -73,4 +73,21 @@ public class RawMovieController {
 		return new ResponseEntity<>(movies,HttpStatus.OK);
 	}
 	
+	@RequestMapping(value="/sortMovieByRating",method=RequestMethod.GET)
+	public ResponseEntity<List<RawMovie>> sortbyRating(){
+		List<RawMovie> movies = movieService.orderByRating();
+		return new ResponseEntity<>(movies,HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/sortMovieByVotes",method=RequestMethod.GET)
+	public ResponseEntity<List<RawMovie>> sortbyVotes(){
+		List<RawMovie> movies = movieService.orderByVotes();
+		return new ResponseEntity<>(movies,HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/sortMovieByYear",method=RequestMethod.GET)
+	public ResponseEntity<List<RawMovie>> sortbyYear(){
+		List<RawMovie> movies = movieService.orderByYear();
+		return new ResponseEntity<>(movies,HttpStatus.OK);
+	}
 }

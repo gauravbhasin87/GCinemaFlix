@@ -16,4 +16,7 @@ public interface RawMovieService {
 	public List<RawMovie> findByType(String type);
 	public List<RawMovie> findByYear(int year);
 	public List<RawMovie> findbyGenre(String genre);
+	public List<RawMovie> orderByRating();
+	public List<RawMovie> orderByVotes();
+	public List<RawMovie> orderByYear();
 }
