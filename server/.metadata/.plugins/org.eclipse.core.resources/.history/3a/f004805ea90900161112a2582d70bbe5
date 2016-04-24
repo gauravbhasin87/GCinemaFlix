@@ -1,0 +1,5 @@
+package com.gcinemaflix.security;
+
+public class AuthFailureHandler {
+
+}
