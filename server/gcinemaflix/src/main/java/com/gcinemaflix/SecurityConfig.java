@@ -20,33 +20,36 @@ import com.gcinemaflix.service.UserService;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    DataSource dataSource;
-    @Autowired
     UserService userService;
 
     @Autowired
     public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-    		
-    		//auth.authenticationProvider(authenticationProvider());
     		auth.userDetailsService(userService);
-    		//      auth.jdbcAuthentication().dataSource(dataSource)
-//        .usersByUsernameQuery(
-//            "select username,password from user where username=?")
-//        .authoritiesByUsernameQuery(
-//            "select username, role from role where username=?");
+    		//auth.authenticationProvider(authenticationProvider());
     }   
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
     			http
+    			//	.userDetailsService(userService)
+    			//	.authenticationProvider(authenticationProvider())
     				.authorizeRequests()
     				.anyRequest().authenticated()
     				.and()
     				.formLogin()
     				.and()
-    				.httpBasic()
+    				.csrf().disable()
     				;
     	}
+    
+    @Bean
+    public AuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+        authenticationProvider.setUserDetailsService(userService);
+        authenticationProvider.setPasswordEncoder(new ShaPasswordEncoder());
+
+        return authenticationProvider;
+    }
     
     
 

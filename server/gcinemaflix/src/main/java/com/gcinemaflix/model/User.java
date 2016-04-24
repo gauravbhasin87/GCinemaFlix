@@ -17,9 +17,12 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "user")
-public class User implements UserDetails{
+@JsonIgnoreProperties(ignoreUnknown = true) 
+public class User{
 	
 	@Id
 	@GeneratedValue
@@ -32,15 +35,19 @@ public class User implements UserDetails{
 	private String username;
 	@Column(name="password",nullable=false)
 	private String password;
-	@OneToOne(mappedBy="user", cascade={CascadeType.ALL})
-	private Role role;
+//	@OneToOne(mappedBy="user", cascade={CascadeType.ALL})
+//	private Role role;
 	
-	public Role getRole() {
-		return role;
-	}
-	public void setRole(Role role) {
-		this.role = role;
-	}
+	private Integer Access;
+	
+//	public Role getRole() {
+//		return role;
+//	}
+//	public void setRole(Role role) {
+//		this.role = role;
+//	}
+	
+	
 	public int getId() {
 		return id;
 	}
@@ -59,24 +66,23 @@ public class User implements UserDetails{
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	@Override
+	
 	public String getUsername() {
 		return username;
 	}
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	@Override
 	public String getPassword() {
 		return password;
 	}
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	@Override
+	
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		List<GrantedAuthority> list = new ArrayList<>();
-		if(role.getAccess()==1){
+		if(getAccess()==1){
 			list.add(new SimpleGrantedAuthority("ROLE_USER"));
 			list.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
 		}
@@ -85,25 +91,27 @@ public class User implements UserDetails{
 		}
 		return list;
 	}
-	@Override
 	public boolean isAccountNonExpired() {
 		// TODO Auto-generated method stub
 		return true;
 	}
-	@Override
 	public boolean isAccountNonLocked() {
 		// TODO Auto-generated method stub
 		return true;
 	}
-	@Override
 	public boolean isCredentialsNonExpired() {
 		// TODO Auto-generated method stub
 		return true;
 	}
-	@Override
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
 		return true;
+	}
+	public Integer getAccess() {
+		return Access;
+	}
+	public void setAccess(Integer access) {
+		Access = access;
 	}
 
 }

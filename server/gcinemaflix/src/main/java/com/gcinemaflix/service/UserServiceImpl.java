@@ -10,9 +10,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+import org.springframework.security.core.userdetails.*;
 import com.gcinemaflix.model.Role;
 import com.gcinemaflix.model.User;
+//import org.springframework.security.core.userdetails.User;
 import com.gcinemaflix.repository.*;
 
 @Service
@@ -28,9 +29,11 @@ public class UserServiceImpl implements UserService {
 				return null;
 			}
 			else{
-				Role role = new Role();
-				role.setAccess(0);
-				user.setRole(role);
+//				Role role = new Role();
+//				role.setUser(existingUser);
+//				role.setAccess(0);
+//				user.setRole(role);
+				user.setAccess(0);
 				return userRepository.save(user);
 			}
 	}
@@ -59,7 +62,18 @@ public class UserServiceImpl implements UserService {
 		User user = userRepository.findByUsername(username);
 		if(user == null)
 			throw new UsernameNotFoundException(username);
+		boolean enabled = true;
+		boolean accountNonExpired = true;
+		boolean credentialsNonExpired = true;
+		boolean accountNonLocked = true;
 		
-		return user;
+		return new org.springframework.security.core.userdetails.User(
+				user.getUsername(), 
+				user.getPassword().toLowerCase(),
+				enabled,
+				accountNonExpired,
+				credentialsNonExpired,
+				accountNonLocked,
+				user.getAuthorities());
 	}
 }
