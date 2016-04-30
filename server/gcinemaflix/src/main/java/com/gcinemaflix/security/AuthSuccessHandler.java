@@ -16,16 +16,16 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-
+@Component
 public class AuthSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
    // private static final Logger LOGGER = LoggerFactory.getLogger(AuthSuccessHandler.class);
 
-    private final ObjectMapper mapper;
+    //private final ObjectMapper mapper;
 
-    @Autowired
-    AuthSuccessHandler(MappingJackson2HttpMessageConverter messageConverter) {
-        this.mapper = messageConverter.getObjectMapper();
-    }
+//    @Autowired
+//    AuthSuccessHandler(MappingJackson2HttpMessageConverter messageConverter) {
+//        this.mapper = messageConverter.getObjectMapper();
+//    }
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
@@ -34,8 +34,8 @@ public class AuthSuccessHandler extends SavedRequestAwareAuthenticationSuccessHa
     			response.setStatus(HttpServletResponse.SC_OK);
     			UserDetails user = (UserDetails) authentication.getPrincipal();
     			
-    			PrintWriter writer = response.getWriter();
-    			mapper.writeValue(writer, user);
-    			writer.flush();
+//    			PrintWriter writer = response.getWriter();
+//    			mapper.writeValue(writer, user);
+//    			writer.flush();
     }
 }

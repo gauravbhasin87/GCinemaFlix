@@ -4,42 +4,62 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
+import com.gcinemaflix.security.AuthFailureHandler;
+import com.gcinemaflix.security.AuthSuccessHandler;
+import com.gcinemaflix.security.HttpAuthenticationEntryPoint;
 import com.gcinemaflix.service.UserService;
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(securedEnabled = true)
+@ComponentScan(value = "com.gcinemaflix.security")
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     UserService userService;
+    @Autowired
+    private HttpAuthenticationEntryPoint authenticationEntryPoint;
+    @Autowired
+    private AuthSuccessHandler authSuccessHandler;
+    @Autowired
+    private AuthFailureHandler authFailureHandler;
 
     @Autowired
     public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-    		auth.userDetailsService(userService);
-    		//auth.authenticationProvider(authenticationProvider());
+    	//	auth.userDetailsService(userService);
+    		auth.authenticationProvider(authenticationProvider());
     }   
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
     			http
     			//	.userDetailsService(userService)
-    			//	.authenticationProvider(authenticationProvider())
-    				.authorizeRequests()
-    				.anyRequest().authenticated()
+    				.authenticationProvider(authenticationProvider())
+    			//	.authorizeRequests()
+    			//	.anyRequest().authenticated()
+    			//	.and()
+    				.exceptionHandling()
+    				.authenticationEntryPoint(authenticationEntryPoint)
     				.and()
     				.formLogin()
+    				.permitAll()
+    				.failureHandler(authFailureHandler)
+    				.successHandler(authSuccessHandler)
     				.and()
     				.csrf().disable()
     				;
+    			http.authorizeRequests().anyRequest().authenticated();
     	}
     
     @Bean
