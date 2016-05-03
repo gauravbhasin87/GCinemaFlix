@@ -37,6 +37,6 @@ public class AuthSuccessHandler extends SavedRequestAwareAuthenticationSuccessHa
     			PrintWriter writer = response.getWriter();
     			writer.write("Done");
     			//    			mapper.writeValue(writer, user);
-    			writer.flush();
+//    			writer.flush();
     }
 }

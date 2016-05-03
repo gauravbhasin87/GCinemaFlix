@@ -34,9 +34,8 @@ public class AuthSuccessHandler extends SavedRequestAwareAuthenticationSuccessHa
     			response.setStatus(HttpServletResponse.SC_OK);
     			UserDetails user = (UserDetails) authentication.getPrincipal();
     			
-    			PrintWriter writer = response.getWriter();
-    			writer.write("Done");
-    			//    			mapper.writeValue(writer, user);
-    			writer.flush();
+//    			PrintWriter writer = response.getWriter();
+//    			mapper.writeValue(writer, user);
+//    			writer.flush();
     }
 }
